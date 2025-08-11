@@ -15,6 +15,7 @@ public class HealthModel : MonoBehaviour
     public void InitHealth(float value)
     {
         _health = value;
+        _maxHealth = _health;
     }
 
     public void TakeDamage(float damageAmount)
