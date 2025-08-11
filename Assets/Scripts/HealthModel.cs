@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class HealthModel : MonoBehaviour
 {
+    public event Action<HealthModel> OnSpawn;
+    public event Action<HealthModel> OnDie;
+    
     private float _health;
     public float Health => _health;
     
@@ -31,11 +35,11 @@ public class HealthModel : MonoBehaviour
 
     public virtual void Die()
     {
+        OnDie?.Invoke(this);
     }
 
     public virtual void Respawn(float initHealthAmount)
     {
-        gameObject.SetActive(true);
-        InitHealth(initHealthAmount);
+        OnSpawn?.Invoke(this);
     }
 }
