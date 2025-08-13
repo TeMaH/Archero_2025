@@ -12,7 +12,7 @@ public class HealthModel : MonoBehaviour
     private float _maxHealth;
     public float MaxHealth => _maxHealth;
 
-    public void InitHealth(float value)
+    public void Init(float value)
     {
         _health = value;
         _maxHealth = _health;
