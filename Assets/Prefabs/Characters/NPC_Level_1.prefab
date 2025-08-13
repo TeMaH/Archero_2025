@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 4325078747373936442}
   - component: {fileID: 5258830619884932368}
   - component: {fileID: 722280484388825459}
+  - component: {fileID: 1230733602341538668}
+  - component: {fileID: 3185847455948993305}
   m_Layer: 7
   m_Name: NPC_Level_1
   m_TagString: Untagged
@@ -149,3 +151,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 4
   rotationSpeed: 4
+--- !u!114 &1230733602341538668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6109462166535064721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deffe90a848c45b4a92faf0dae74466c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3185847455948993305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6109462166535064721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0266a09b0995d7f4e89c198973acbe24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
