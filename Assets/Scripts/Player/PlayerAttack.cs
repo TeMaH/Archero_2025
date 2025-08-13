@@ -10,6 +10,8 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] private float overlappingRange;
     [SerializeField] private LayerMask ableToAttackLayer;
+    
+    private HealthModel _healthModel;
 
     private List<PlayerProjectile> _projectiles;
     private Vector3 _attackDirection;
@@ -20,6 +22,16 @@ public class PlayerAttack : MonoBehaviour
     {
         _projectiles ??= new List<PlayerProjectile>();
         _defaaultTimerValue = cooldownTimer;
+        _healthModel = GetComponent<HealthModel>();
+        
+        _healthModel.Init(100.0f);
+        _healthModel.OnDie += HealthModelOnOnDie;
+    }
+
+    private void HealthModelOnOnDie(HealthModel ctx)
+    {
+        Debug.Log($"{ctx.gameObject.name} is Dead !");
+        ctx.gameObject.SetActive(false);
     }
 
     private void Update()
