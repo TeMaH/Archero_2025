@@ -45,7 +45,7 @@ public class PlayerAttack : MonoBehaviour
 
             if (!enemy)
             {
-                _attackDirection = transform.forward;
+                return;
             }
             else
             {

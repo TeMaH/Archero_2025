@@ -2,13 +2,11 @@ using UnityEngine;
 
 public class LevelSpawn : MonoBehaviour
 {
+    [SerializeField] Gate gate;
+    public Gate Gate => gate;
+
     public Transform playerSpawnPoint;
     public Transform[] enemySpawnPoint;
-
-    public void SpawnPlayer(GameObject playerPrefab)
-    {
-        GameObject player = Instantiate(playerPrefab, playerSpawnPoint.position, Quaternion.identity);
-    }
     
     public void SpawnEnemy(GameObject enemyPrefab)
     {
