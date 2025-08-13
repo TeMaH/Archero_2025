@@ -5,9 +5,14 @@ public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerProjectile projectile;
+    
     [SerializeField] private float cooldownTimer = 0.5f;
 
+    [SerializeField] private float overlappingRange;
+    [SerializeField] private LayerMask ableToAttackLayer;
+
     private List<PlayerProjectile> _projectiles;
+    private Vector3 _attackDirection;
     private float _defaaultTimerValue;
     private bool _onCooldown;
 
@@ -23,23 +28,58 @@ public class PlayerAttack : MonoBehaviour
         
         if (!_onCooldown)
         {
+            var enemy = FindClosestEnemy();
+
+            if (!enemy)
+            {
+                _attackDirection = transform.forward;
+            }
+            else
+            {
+                transform.LookAt(enemy);
+                _attackDirection = (enemy.position - transform.position).normalized;
+            }
+            
             var newProjectile = Instantiate(projectile, transform.localPosition, Quaternion.identity);
-            newProjectile?.LaunchProjectile(transform.forward);
             _projectiles.Add(projectile);
+            
+            newProjectile?.LaunchProjectile(_attackDirection);
 
             _onCooldown = true;
             return;
         }
 
-        if (_onCooldown)
+        CountTimer();
+    }
+
+    private void CountTimer()
+    {
+        if (!_onCooldown) return;
+        
+        cooldownTimer -= Time.deltaTime;
+        if (!(cooldownTimer <= 0f)) return;
+        
+        _onCooldown = false;
+        cooldownTimer = _defaaultTimerValue;
+    }
+
+    public Transform FindClosestEnemy()
+    {
+        var enemies = Physics.OverlapSphere(transform.position, overlappingRange, ableToAttackLayer);
+
+        Transform closestEnemy = null;
+        var closestDistanceSqr = Mathf.Infinity;
+
+        foreach (var enemy in enemies)
         {
-            cooldownTimer -= Time.deltaTime;
-            if (cooldownTimer <= 0f)
+            var sqrDistance = (enemy.transform.position - transform.position).sqrMagnitude;
+            if (sqrDistance < closestDistanceSqr)
             {
-                _onCooldown = false;
-                cooldownTimer = _defaaultTimerValue;
+                closestDistanceSqr = sqrDistance;
+                closestEnemy = enemy.transform;
             }
         }
-        
+
+        return closestEnemy;
     }
 }

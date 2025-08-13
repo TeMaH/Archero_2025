@@ -216,6 +216,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 4637158874623598984}
   projectile: {fileID: 3402080506785239056, guid: cee34272837fce445b453951e3c4155c, type: 3}
+  cooldownTimer: 0.5
+  overlappingRange: 12
+  ableToAttackLayer:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!114 &1510900463861307840
 MonoBehaviour:
   m_ObjectHideFlags: 0
