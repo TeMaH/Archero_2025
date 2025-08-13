@@ -8,6 +8,6 @@ public class PlayerModel : MonoBehaviour
 
     private void Awake()
     {
-        Health.InitHealth(95.0f);
+        // Health.InitHealth(95.0f);
     }
 }

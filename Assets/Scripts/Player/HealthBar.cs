@@ -1,31 +1,32 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+    [SerializeField] private HealthModel health;
     [SerializeField] private Canvas healthBarCanvas;
-    [SerializeField] private Camera mainCamera;
-
-    // replace with PlayerModel !
-    [SerializeField] private PlayerAttack playerAttack;
     [SerializeField] private Slider healthBar;
+
+    private Camera _mainCamera;
 
     private void Start()
     {
-        healthBar.value = playerAttack.HealthModel.Health;
-        healthBar.maxValue = playerAttack.HealthModel.MaxHealth;
+        healthBar.value = health.Health;
+        healthBar.maxValue = health.MaxHealth;
         
-        playerAttack.HealthModel.OnTakeDamage += OnPlayerTakeDamage;
+        health.OnTakeDamage += OnPlayerTakeDamage;
+        
+        _mainCamera = Camera.main;
     }
 
     private void OnPlayerTakeDamage(HealthModel ctx)
     {
-        healthBar.value = ctx.Health / ctx.MaxHealth;
+        healthBar.value = (health.Health / health.MaxHealth) * 100.0f;
+        Debug.Log($"Current Health: {health.Health} / MaxHealth: {health.MaxHealth} = healthBar.value");
     }
 
     private void LateUpdate()
     {
-        transform.LookAt(healthBarCanvas.transform.position + mainCamera.transform.forward);
+        // transform.LookAt(transform.position = _mainCamera.transform.forward);
     }
 }
