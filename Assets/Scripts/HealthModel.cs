@@ -5,6 +5,7 @@ public class HealthModel : MonoBehaviour
 {
     public event Action<HealthModel> OnSpawn;
     public event Action<HealthModel> OnDie;
+    public event Action<HealthModel> OnTakeDamage;
     
     private float _health;
     public float Health => _health;
@@ -22,6 +23,7 @@ public class HealthModel : MonoBehaviour
     {
         _health -= damageAmount;
         _health = Mathf.Clamp(_health, 0f, _maxHealth);
+        OnTakeDamage?.Invoke(this);
         
         if (_health > 0.0f) return;
         

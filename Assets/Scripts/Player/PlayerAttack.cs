@@ -12,6 +12,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private LayerMask ableToAttackLayer;
     
     private HealthModel _healthModel;
+    public HealthModel HealthModel => _healthModel;
 
     private List<PlayerProjectile> _projectiles;
     private Vector3 _attackDirection;
